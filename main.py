@@ -11,5 +11,5 @@ class SpiderKun(scrapy.Spider):
         page = response.url.split("/")[-2] # wtf is this hackery. 
         filename = 'quotes-%s.html' % page
         with open(filename, 'wb') as f:
-            f.write(response.body)
+            f.write(response.xpath('//*[@id="quote_display_content_3"]/text()').getall()) # just gets one. need 2 iterate
         self.log('Saved file %s' % filename)
